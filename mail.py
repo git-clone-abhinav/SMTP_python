@@ -19,17 +19,26 @@ def send_mail(uid,passphrase,sub,body,mail_to):
         mail_to,
         msg
     )
-    print("Mail has been Sent !")
+    print(f"Mail sent to {mail_to}".format())
     server.quit()
-
+'''
 email_ids=[]
 n=int(input("How many mails do u wanna send ?"))
 for i in range(n):
     email = input(f"Enter email no {i}:")
     email_ids.append(email)
-
-sub = input("Enter Subject for the Mail : ")
-body = input("Enter Body of the Mail : ")
-
+'''
+#sub = input("Enter Subject for the Mail : ")
+#body = input("Enter Body of the Mail : ")
+'''
 for mail_to in email_ids:
-    send_mail(uid,passphrase,sub,body,mail_to)
+    send_mail(uid,passphrase,sub,body,mail_to)'''
+
+try:
+    mails = open("/home/pi/Desktop/SMTP_python/mailids.csv","r")
+    sub = input("Enter Subject for the Mail : ")
+    body = input("Enter Body of the Mail : ")
+    send_mail(uid,passphrase,sub,body,mails.read())
+    mails.close()
+except Exception as e:
+    print("Exception Raised : ",e)
